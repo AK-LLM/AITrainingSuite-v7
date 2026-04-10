@@ -20,10 +20,15 @@ from app.tests.catalog import build_full_catalog, run_catalog
 st.set_page_config(page_title="AITrainingSuite v7 Hardened", layout="wide")
 
 APP_ROOT = Path(__file__).resolve().parent
-DB_PATH = APP_ROOT / "data" / "experiments.db"
+DATA_DIR = APP_ROOT / "data"
 EXPORT_DIR = APP_ROOT / "exports"
 DOCX_DIR = APP_ROOT / "app" / "docx"
 
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+EXPORT_DIR.mkdir(parents=True, exist_ok=True)
+DOCX_DIR.mkdir(parents=True, exist_ok=True)
+
+DB_PATH = DATA_DIR / "experiments.db"
 db = ExperimentDB(str(DB_PATH))
 guard = DatasetGuard()
 scorer = RiskScorer()
